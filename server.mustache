@@ -1,0 +1,57 @@
+{{#alternativePort}}
+{{#alternativePort.http}}
+server {
+    listen {{alternativePort.http}} default_server;
+    listen [::]:{{alternativePort.http}} default_server;
+
+    server_name _;
+
+    gzip on;
+
+    {{#index}}
+    index {{index}};
+    {{/index}}
+    {{#root}}
+    root {{root}};
+    {{/root}}
+
+    {{> /usr/syno/share/nginx/error_page}}
+    {{#x-accel}}
+    {{> /usr/syno/share/nginx/X-Accel}}
+    {{/x-accel}}
+
+    {{> /usr/syno/share/nginx/acl.mustache}}
+
+    include conf.d/{{include}};
+}
+{{/alternativePort.http}}
+{{#alternativePort.https}}
+server {
+    listen {{alternativePort.https}} default_server ssl;
+    listen [::]:{{alternativePort.https}} default_server ssl;
+
+    server_name _;
+
+    {{#https_alt_port}}
+    {{> /usr/syno/share/nginx/https.mustache}}
+    {{/https_alt_port}}
+
+    include conf.d/ssl.*.conf;
+    {{#index}}
+    index {{index}};
+    {{/index}}
+    {{#root}}
+    root {{root}};
+    {{/root}}
+
+    {{> /usr/syno/share/nginx/error_page}}
+    {{#x-accel}}
+    {{> /usr/syno/share/nginx/X-Accel}}
+    {{/x-accel}}
+
+    {{> /usr/syno/share/nginx/acl.mustache}}
+
+    include conf.d/{{include}};
+}
+{{/alternativePort.https}}
+{{/alternativePort}}
