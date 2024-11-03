@@ -1,7 +1,7 @@
 services:
   app:
     image: 'linuxserver/mysql:latest'
-    container_name: 'MySql'
+    container_name: 'MySQL'
     restart: unless-stopped
     volumes:
       - /volume1/docker/mysqldata:/config
