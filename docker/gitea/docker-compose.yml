@@ -1,0 +1,13 @@
+services:
+  app:
+    image: 'gitea/gitea:latest'
+    container_name: 'Gitea'
+    restart: unless-stopped
+    volumes:
+      - /volume1/docker/gitea:/data
+    networks:
+      mynet:
+        ipv4_address: 172.18.0.10
+networks:
+  mynet:
+    external: true
