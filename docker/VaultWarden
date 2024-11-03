@@ -1,0 +1,13 @@
+services:
+  app:
+    image: 'vaultwarden/server:latest'
+    container_name: 'VaultWarden'
+    restart: unless-stopped
+    volumes:
+      - /volume1/docker/vaultwarden/data:/data
+    networks:
+      mynet:
+        ipv4_address: 172.18.0.30
+networks:
+  mynet:
+    external: true
