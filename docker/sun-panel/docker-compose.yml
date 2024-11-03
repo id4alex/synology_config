@@ -1,0 +1,13 @@
+services:
+  app:
+    image: 'hslr/sun-panel:latest'
+    container_name: 'SunPanel'
+    restart: unless-stopped
+    volumes:
+      - /volume1/docker/sun-panel:/app/conf
+    networks:
+      mynet:
+        ipv4_address: 172.18.0.20
+networks:
+  mynet:
+    external: true
